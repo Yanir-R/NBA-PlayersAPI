@@ -1,12 +1,15 @@
 import React from 'react'
 import { Player } from '../player';
 import '../App.css';
+import { useFavoritePlayer } from '../useFavoritePlayer';
 interface nbaPreviewProps {
     data: Player;
 }
 
 export const NbaPreview: React.FC<nbaPreviewProps> = ({ data }) => {
-    
+    const [isFavorite, toggleIsFavorite] = useFavoritePlayer(
+        data.id.toString()
+    )
     return (
         <div className='playerInfoContainer'>
             <header> ID: {data.id}</header>
@@ -19,7 +22,7 @@ export const NbaPreview: React.FC<nbaPreviewProps> = ({ data }) => {
             <div >
                 Team Division:  {data.team.division}
             </div>
-            <button>Add to Favorite</button>
+            <button onClick={toggleIsFavorite}>{isFavorite ? "Delete From Favorites" : "Add To favorites"}</button>
         </div>
     );
 }

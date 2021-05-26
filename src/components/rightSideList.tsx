@@ -1,11 +1,19 @@
-import React from 'react'
+/* eslint-disable array-callback-return */
+import React from 'react';
 
-interface rightSideListProps {
+// interface rightSideListProps {
+   
+// }
 
-}
-
-export const RightSideList: React.FC<rightSideListProps> = () => {
+export const RightSideList: React.FC = () => {
     return (
-        <div>right Side Comp</div>
-    );
-}
+        <>
+            <div>Right Side</div>
+
+
+        </>
+    )
+};
+
+
+

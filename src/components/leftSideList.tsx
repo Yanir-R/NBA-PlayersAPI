@@ -9,12 +9,10 @@ export const LeftSideList: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
     const [search, setSearch] = useState('')
+    const [filteredNbaPlayers, setFilteredNbaPlayers] = useState([]);
     // const [nbalist, setNbaList] = useState([]);
 
     api.searchNbaPlayerName()
-    const filterPlayers = data.filter((list: Player) => {
-        return list.first_name.toLowerCase().includes(search.toLowerCase())
-    })
 
     useEffect(() => {
         setLoading(true);
@@ -31,6 +29,14 @@ export const LeftSideList: React.FC = () => {
             });
     }, []);
 
+    useEffect(() => {
+        setFilteredNbaPlayers(
+            data.filter((list: Player) => {
+                return list.first_name.toLowerCase().includes(search.toLowerCase())
+            })
+        )
+    }, [search, data])
+
     if (loading) {
         return <p>Data is loading...</p>;
     }
@@ -38,12 +44,11 @@ export const LeftSideList: React.FC = () => {
     if (error || !Array.isArray(data)) {
         return <p>There was an error loading your data!</p>;
     }
-
     return (
         <>
             < input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
             <ul>
-                {filterPlayers.map((player: Player) => (<NbaPreview key={player.id} data={player} />))}
+                {filteredNbaPlayers.map((player: Player) => (<NbaPreview key={player.id} data={player} />))}
             </ul>
 
         </>

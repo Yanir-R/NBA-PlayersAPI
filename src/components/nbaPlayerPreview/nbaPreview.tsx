@@ -1,5 +1,5 @@
 import React from 'react'
-import { Player } from '../../interface/player';
+import { Player } from '../../react-app-env';
 import '../../App.css';
 import { useFavoritePlayer } from '../useFavoritePlayer';
 interface nbaPreviewProps {

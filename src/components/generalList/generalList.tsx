@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { api } from '../../api';
 import { url } from '../../constants';
-import { Player } from '../../interface/player';
+import { Player } from '../../react-app-env';
 import { NbaPreview } from '../nbaPlayerPreview/nbaPreview';
 
 export const GeneralList: React.FC = () => {

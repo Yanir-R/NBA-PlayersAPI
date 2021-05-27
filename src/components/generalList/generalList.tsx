@@ -3,6 +3,7 @@ import { api } from '../../api';
 import { url } from '../../constants';
 import { Player } from '../../react-app-env';
 import { NbaPreview } from '../nbaPlayerPreview/nbaPreview';
+import '../../App.css'
 
 export const GeneralList: React.FC = () => {
     const [data, setData] = useState([]);
@@ -10,7 +11,10 @@ export const GeneralList: React.FC = () => {
     const [error, setError] = useState();
     const [search, setSearch] = useState('')
     const [filteredNbaPlayers, setFilteredNbaPlayers] = useState([]);
+    const initalState = localStorage.favorites ? JSON.parse(localStorage.favorites) : [];
     // const [nbalist, setNbaList] = useState([]);
+    const [favoritePlayers, setFavoritePlayers] = useState(initalState);
+  
 
     api.searchNbaPlayerName()
 
@@ -47,17 +51,21 @@ export const GeneralList: React.FC = () => {
 
     return (
         <>
-            < input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
-            <ul>
-                {filteredNbaPlayers.map((player: Player) => (<NbaPreview key={player.id} data={player} />))}
-            </ul>
+            <div className="flex-container">
+                <div className='flex-child'>
+                    <ul>
+                        < input type="text" placeholder="Serach Player" onChange={e => setSearch(e.target.value)} />
+                        {filteredNbaPlayers.map((player: Player) => (<NbaPreview key={player.id} data={player} />))}
+                    </ul>
+                </div>
+                <div className='flex-child'>
+                    <ul>{favoritePlayers.map((p: Player) => (<NbaPreview key={p.id} data={p} />))}
+                    </ul>
+                </div>
+            </div>
 
         </>
     );
-
-
-
-
 
 }
 

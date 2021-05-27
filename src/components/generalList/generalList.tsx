@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { api } from '../api';
-import { url } from '../constants';
-import { Player } from '../player';
-import { NbaPreview } from './nbaPreview';
+import { api } from '../../api';
+import { url } from '../../constants';
+import { Player } from '../../interface/player';
+import { NbaPreview } from '../nbaPlayerPreview/nbaPreview';
 
-export const LeftSideList: React.FC = () => {
+export const GeneralList: React.FC = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
@@ -44,6 +44,7 @@ export const LeftSideList: React.FC = () => {
     if (error || !Array.isArray(data)) {
         return <p>There was an error loading your data!</p>;
     }
+
     return (
         <>
             < input type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />

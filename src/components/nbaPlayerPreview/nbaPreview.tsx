@@ -1,6 +1,6 @@
 import React from 'react'
-import { Player } from '../player';
-import '../App.css';
+import { Player } from '../../interface/player';
+import '../../App.css';
 import { useFavoritePlayer } from '../useFavoritePlayer';
 interface nbaPreviewProps {
     data: Player;

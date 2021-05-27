@@ -1,19 +1,21 @@
 /* eslint-disable array-callback-return */
 import React from 'react';
+// import { Player } from '../interface/player';
 
 // interface rightSideListProps {
-   
+
 // }
 
 export const RightSideList: React.FC = () => {
     return (
         <>
-            <div>Right Side</div>
-
-
+            <ul>
+                right side
+            </ul>
         </>
     )
 };
+
 
 
 

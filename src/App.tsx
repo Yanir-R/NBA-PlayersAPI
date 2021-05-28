@@ -1,34 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { GeneralList } from "./components/generalList/generalList";
-
+import { Search } from "./components/search/search";
 import "./App.css";
 import { api } from "./api";
 import { Player } from "./react-app-env";
-import { searchUrl } from "./constants";
+import { useFavorites } from "../src/useFavorites";
 interface AppProps { }
 
+export const FavoritesContext = React.createContext<{ toggleFavorite: (id: Player['id']) => void }>({ toggleFavorite: (id: Player['id']) => { } });
+
 export const App: React.FC<AppProps> = () => {
-  const [filteredNbaPlayers, setFilteredNbaPlayers] = useState([]);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Player[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
-  const [search, setSearch] = useState('');
-
-
-  useEffect(() => {
-    setLoading(true);
-    api
-      .searchNbaPlayerName(search)
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [search]);
+  const [favorites, toggleFavorite] = useFavorites();
 
   useEffect(() => {
     setLoading(true);
@@ -53,22 +38,21 @@ export const App: React.FC<AppProps> = () => {
     return <p>There was an error loading your data!</p>;
   }
 
+  const favoritePlayers = data.filter((player) => favorites[player.id]);
+  const notFavoritePlayers = data.filter((player) => !favorites[player.id]);
+  console.log('fav', favorites)
   return (
     <>
-
+      <Search updatePlayers={setData} />
       <div className="flex-container">
-
-        <div className="flex-child">
-          <input
-            type="text"
-            placeholder="Search Player"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <GeneralList players={data} />
-        </div>
-        <div className="flex-child">
-          <GeneralList players={data} />
-        </div>
+        <FavoritesContext.Provider value={{ toggleFavorite }}>
+          <div className="flex-child">
+            <GeneralList players={notFavoritePlayers} />
+          </div>
+          <div className="flex-child">
+            <GeneralList players={favoritePlayers} />
+          </div>
+        </FavoritesContext.Provider>
       </div>
     </>
   );

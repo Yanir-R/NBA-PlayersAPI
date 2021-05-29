@@ -1,27 +1,36 @@
 import React, { useContext } from "react";
 import { Player } from "../../react-app-env";
-import {FavoritesContext} from '../../App'
-import "../../App.css";
+import { FavoritesContext } from '../../App'
+import { Badge, Button, Card } from "react-bootstrap";
 interface nbaPreviewProps {
   data: Player;
 }
 
 export const NbaPreview: React.FC<nbaPreviewProps> = ({ data }) => {
-    const {toggleFavorite} = useContext(FavoritesContext)
-
+  const { toggleFavorite, isFavorite } = useContext(FavoritesContext)
   return (
-    <div className="playerInfoContainer">
-      <header> ID: {data.id}</header>
-      <div>First Name: {data.first_name}</div>
-      <div>Last Name: {data.last_name}</div>
-      <div>Team Division: {data.team.division}</div>
-      <button
+
+    <Card border='info' className="mb-3 pt-2 mx-4 "
+    >
+      <Card.Header>   <Badge pill variant="info">ID: {data.id}</Badge> </Card.Header>
+      <Card.Body>
+        <Card.Title> Name: {data.first_name}</Card.Title>
+        <Card.Text>
+          Last Name: {data.last_name}
+        </Card.Text>
+        <Card.Text>
+          Team Division: {data.team.division}
+        </Card.Text>
+      </Card.Body>
+      <Button
+     
+        variant="outline-primary"
         onClick={() => {
           toggleFavorite(data.id);
         }}
       >
-        Button
-      </button>
-    </div>
+        {isFavorite ? 'Add' : 'Remove'}
+      </Button>
+    </Card>
   );
 };

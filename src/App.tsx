@@ -59,18 +59,20 @@ export const App: React.FC = () => {
         </Card.Footer>
       </Card>
       <Row>
-        <Col>
+        <Col >
           <FavoritesContext.Provider
             value={{ theme: 'light', toggleFavorite, isFavorite: false }}>
-            <h1 className="text-center">NBA Player List:</h1>
+            <h1 className="text-center p-3">
+              NBA Player List:
+              </h1>
             <GeneralList players={notFavoritePlayers} />
           </FavoritesContext.Provider>
         </Col>
-        <Col  >
-          <h1>
+        <Col >
+          <h1 className="text-center ">
             My Favorite NBA Players:
           </h1>
-          <Form.Check className='text-center' onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} type="switch" id="custom-switch" label="Change Background Color" />
+          <Form.Check className='text-center p-1' onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} type="switch" id="custom-switch" label="Change Background Color" />
           <FavoritesContext.Provider
             value={{ theme, toggleFavorite, isFavorite: true }}>
             <GeneralList players={favoritePlayers} />

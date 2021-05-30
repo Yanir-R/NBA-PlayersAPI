@@ -4,17 +4,18 @@ import { Search } from "./components/search/search";
 import { api } from "./api";
 import { Player } from "./react-app-env";
 import { useFavorites } from "./useFavorites";
-import {Card, Col, Container, Row } from "react-bootstrap";
-interface AppProps { }
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
 
-export const FavoritesContext = React.createContext<{ isFavorite: boolean, toggleFavorite: (id: Player['id']) => void }>({ isFavorite: false, toggleFavorite: (id: Player['id']) => { } });
+type ITheme = 'light' | 'dark'
 
-export const App: React.FC<AppProps> = () => {
+export const FavoritesContext = React.createContext<{ theme: ITheme, isFavorite: boolean, toggleFavorite: (id: Player['id']) => void }>({ theme: 'light', isFavorite: false, toggleFavorite: (id: Player['id']) => { } });
+
+export const App: React.FC = () => {
   const [data, setData] = useState<Player[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [favorites, toggleFavorite] = useFavorites();
-
+  const [theme, setTheme] = useState<ITheme>('light');
 
   useEffect(() => {
     setLoading(true);
@@ -53,20 +54,25 @@ export const App: React.FC<AppProps> = () => {
             Choose your FAVORITE players!
     </Card.Text>
         </Card.Body>
-        <Card.Footer className="text-muted">   <Search updatePlayers={setData} /></Card.Footer>
+        <Card.Footer className="text-muted">
+          <Search updatePlayers={setData} />
+        </Card.Footer>
       </Card>
       <Row>
         <Col>
-          <FavoritesContext.Provider value={{ toggleFavorite, isFavorite: true }}>
+          <FavoritesContext.Provider
+            value={{ theme: 'light', toggleFavorite, isFavorite: false }}>
             <h1 className="text-center">NBA Player List:</h1>
             <GeneralList players={notFavoritePlayers} />
           </FavoritesContext.Provider>
         </Col>
-        <Col>
-          <h1 className="text-center">
+        <Col  >
+          <h1>
             My Favorite NBA Players:
           </h1>
-          <FavoritesContext.Provider value={{ toggleFavorite, isFavorite: false }}>
+          <Form.Check className='text-center' onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} type="switch" id="custom-switch" label="Change Background Color" />
+          <FavoritesContext.Provider
+            value={{ theme, toggleFavorite, isFavorite: true }}>
             <GeneralList players={favoritePlayers} />
           </FavoritesContext.Provider>
         </Col>

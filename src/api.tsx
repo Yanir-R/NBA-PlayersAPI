@@ -1,4 +1,7 @@
-import { url, searchUrl } from "./constants";
+import {
+    url,
+    searchUrl
+} from "./constants";
 
 export const api = {
     nbaPlayerList: () => {

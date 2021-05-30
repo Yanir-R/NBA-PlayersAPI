@@ -45,12 +45,12 @@ I created the project to test my abilities With API, React & Bootstrap.
 
 
 ## Technologies
-
+<p align="flex">  
 <img src="https://img.icons8.com/nolan/64/react-native.png" alt="reactjs"/>
 <img src="https://img.icons8.com/color/48/000000/typescript.png" alt="typescript"/>
 <img src="https://img.icons8.com/color/48/000000/bootstrap.png" alt="bootstrap"/>
 <img src="https://img.icons8.com/nolan/64/css-filetype.png" alt="css"/>
-
+</p>
 
 ## License
 MIT © [Yanir-r]()

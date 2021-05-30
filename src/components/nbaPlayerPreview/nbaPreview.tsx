@@ -29,7 +29,7 @@ export const NbaPreview: React.FC<nbaPreviewProps> = ({ data }) => {
           toggleFavorite(data.id);
         }}
       >
-        {!isFavorite ? 'Remove' : 'Add'}
+        {isFavorite ? 'Remove' : 'Add'}
       </Button>
     </Card>
   );

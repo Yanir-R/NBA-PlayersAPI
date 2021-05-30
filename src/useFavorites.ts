@@ -4,7 +4,7 @@ import { Player } from "./react-app-env";
 export const useFavorites = (): [any, (id: Player["id"]) => void] => {
     const key = "nbaFavorites";
     const storage: { [key: number]: boolean } = JSON.parse(
-        window.localStorage.getItem(key) as string
+        window.localStorage.getItem(key) || '{}'
     );
     const [favorites, setFavorites] =
         useState<{ [key: number]: boolean }>(storage);

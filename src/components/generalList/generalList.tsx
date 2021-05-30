@@ -6,6 +6,7 @@ import { NbaPreview } from "../nbaPlayerPreview/nbaPreview";
 export const GeneralList: React.FC<{ players: Player[] }> = ({ players }) => {
   const { theme } = useContext(FavoritesContext)
 
+
   return (
     <div className={theme}>
       <ul>
